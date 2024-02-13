@@ -1,0 +1,6 @@
+2023-06-15 11:06:04,718 INFO c.o.ScorecardFileWatcherMain [main] Starting ScorecardFileWatcherMain on IKA1LDJ716S2 with PID 26504 (C:\ScoreCardFileWatcher\ScorecardFileWatcher\target\classes started by subbaiaa in C:\ScoreCardFileWatcher\ScorecardFileWatcher)
+2023-06-15 11:06:04,722 DEBUG c.o.ScorecardFileWatcherMain [main] Running with Spring Boot v2.0.0.RELEASE, Spring v5.0.4.RELEASE
+2023-06-15 11:06:04,722 INFO c.o.ScorecardFileWatcherMain [main] No active profile set, falling back to default profiles: default
+2023-06-15 11:06:17,279 INFO c.o.ScorecardFileWatcherMain [main] Started ScorecardFileWatcherMain in 12.946 seconds (JVM running for 14.464)
+2023-06-15 11:06:17,286 INFO c.o.ScorecardFileWatcherMain [main] Watching folder C:\SCFileWatcherTestFolder\WatchFolder
+2023-06-15 11:06:17,286 DEBUG c.o.ScorecardFileWatcherMain [main] Watching folder C:\SCFileWatcherTestFolder\WatchFolder
