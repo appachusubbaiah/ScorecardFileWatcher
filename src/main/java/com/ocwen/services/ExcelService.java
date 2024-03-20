@@ -34,6 +34,8 @@ import com.ocwen.ExcelHelperAsitRevHrd;
 import com.ocwen.ExcelHelperAsitRmic;
 import com.ocwen.ExcelHelperAsitRoster;
 import com.ocwen.ExcelHelperAsitSkillPort;
+import com.ocwen.ExcelHelperAsitTLImpact;
+import com.ocwen.ExcelHelperAsitTLQC;
 import com.ocwen.ExcelHelperAsitTelephony;
 import com.ocwen.ExcelHelperStarRating;
 import com.ocwen.ExcelHelperTat;
@@ -54,6 +56,8 @@ import com.ocwen.models.ASIT_ROSTER_TABLE;
 import com.ocwen.models.ASIT_SKILLPORT;
 import com.ocwen.models.ASIT_STAR_RATING;
 import com.ocwen.models.ASIT_TELEPHONY;
+import com.ocwen.models.ASIT_TL_IMPACT;
+import com.ocwen.models.ASIT_TL_QC;
 import com.ocwen.repositories.ASIT_APPOINTMENTS_TABLE_Repository;
 import com.ocwen.repositories.ASIT_CMS_DEFECT_Repository;
 import com.ocwen.repositories.ASIT_ICW_QAQC_Repository;
@@ -71,6 +75,8 @@ import com.ocwen.repositories.ASIT_ROSTER_TABLE_Repository;
 import com.ocwen.repositories.ASIT_SKILLPORT_Repository;
 import com.ocwen.repositories.ASIT_STAR_RATING_Repository;
 import com.ocwen.repositories.ASIT_TELEPHONY_Repository;
+import com.ocwen.repositories.ASIT_TL_IMPACT_Repository;
+import com.ocwen.repositories.ASIT_TL_QC_Repository;
 
 @Service
 public class ExcelService {
@@ -126,6 +132,14 @@ public class ExcelService {
 	
 	@Autowired
 	ASIT_NPS_Repository npsRepository;
+	
+	@Autowired
+	ASIT_TL_IMPACT_Repository tlImpRepository;
+	
+	@Autowired
+	ASIT_TL_QC_Repository tlQCRepository;
+	
+	
 	
 	@Autowired
 	private Environment env;
@@ -352,6 +366,32 @@ public class ExcelService {
 			    	  moveFile(file);
 		    	  }
 			      break;
+			      
+	     	case "ASIT_TL_IMPACT.xlsx":
+	     		if(this.fileIsReady(file)){
+		    		  logger.info("About to call excelToObjects",file.getName());
+		    	  List<ASIT_TL_IMPACT> starObjects = ExcelHelperAsitTLImpact.excelToObjects(new FileInputStream(file));
+		    	  System.out.println("Saving to database....");
+		    	  logger.info("Saving to database....");
+		    	  tlImpRepository.saveAll(starObjects);
+		    	  System.out.println("Saved to database");
+		    	  logger.info("Saving to database complete.");
+		    	  moveFile(file);
+	    	  }
+	     		break;
+	     
+	     	case "ASIT_TL_QC.xlsx":
+	     		if(this.fileIsReady(file)){
+		    		  logger.info("About to call excelToObjects",file.getName());
+		    	  List<ASIT_TL_QC> starObjects = ExcelHelperAsitTLQC.excelToObjects(new FileInputStream(file));
+		    	  System.out.println("Saving to database....");
+		    	  logger.info("Saving to database....");
+		    	  tlQCRepository.saveAll(starObjects);
+		    	  System.out.println("Saved to database");
+		    	  logger.info("Saving to database complete.");
+		    	  moveFile(file);
+	    	  }
+	     		break;
 	     default:
 		    	  System.out.println("Unknown file..Ignoring");
 		    	  logger.info("Unknown file..Ignoring");

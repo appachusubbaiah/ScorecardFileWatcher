@@ -65,6 +65,15 @@ public class ASIT_ROSTER_TABLE {
 	  @Column(name = "MNGR_NAME")
 	  private String mngrName;
 	  
+	  @Column(name = "FINAL_STATUS")
+	  private String finalStatus;
+	  
+	  @Column(name = "LIVEVOX_ID")
+	  private String livevoxId;
+	  
+	  @Column(name = "TL_FUSIONID")
+	  private String tlFusionId;
+	  
 	  
 	  public String getEmailId() {
 		return emailId;
@@ -194,4 +203,30 @@ public class ASIT_ROSTER_TABLE {
 		this.mngrName = mngrName;
 	}
 
+	
+	public String getFinalStatus() {
+		return finalStatus;
+	}
+
+	public void setFinalStatus(String finalStatus) {
+		this.finalStatus = finalStatus;
+	}
+
+	public String getLivevoxId() {
+		return livevoxId;
+	}
+
+	public void setLivevoxId(String livevoxId) {
+		this.livevoxId = livevoxId;
+	}
+
+	public String getTlFusionId() {
+		return tlFusionId;
+	}
+
+	public void setTlFusionId(String tlFusionId) {
+		this.tlFusionId = tlFusionId;
+	}
+
+	
 }

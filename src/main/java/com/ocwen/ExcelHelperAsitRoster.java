@@ -22,7 +22,7 @@ import com.ocwen.models.ASIT_SKILLPORT;
 public class ExcelHelperAsitRoster {
 	static Logger logger = LogManager.getLogger(ExcelHelperAsitRoster.class);
 
-	static String[] HEADERs = {"MONTH", "FUSION_ID", "UCID", "NAME","DESIGNATION","TEAM LEADER", "LOCATION", "DEPT", "QA_COMMENTS","BIS_COMMENTS","NTID","OCWEN_EMAIL","BU_SUB_PROCESS","ASST_MNGR_NAME","MNGR_NAME"};
+	static String[] HEADERs = {"MONTH", "FUSION_ID", "UCID", "NAME","DESIGNATION","TEAM LEADER", "LOCATION", "DEPT", "QA_COMMENTS","BIS_COMMENTS","NTID","OCWEN_EMAIL","BU_SUB_PROCESS","ASST_MNGR_NAME","MNGR_NAME","FINAL STATUS","LIVEVOX_ID","TL_FUSIONID"};
 	
 	  static String SHEET = "Sheet1";
 	  
@@ -181,6 +181,31 @@ public class ExcelHelperAsitRoster {
 		        	  else
 		        		  object.setMngrName(formatter.formatCellValue(currentCell));
 		            break;
+		            
+		         case 15:
+		        	  if(formatter.formatCellValue(currentCell).length()==0
+	        		  || formatter.formatCellValue(currentCell).equals(""))
+		        		  object.setFinalStatus(null);
+		        	  else
+		        		  object.setFinalStatus(formatter.formatCellValue(currentCell));
+		            break;
+		        
+		         case 16:
+		        	  if(formatter.formatCellValue(currentCell).length()==0
+	        		  || formatter.formatCellValue(currentCell).equals(""))
+		        		  object.setLivevoxId(null);
+		        	  else
+		        		  object.setLivevoxId(formatter.formatCellValue(currentCell));
+		            break;
+		            
+		         case 17:
+		        	  if(formatter.formatCellValue(currentCell).length()==0
+	        		  || formatter.formatCellValue(currentCell).equals(""))
+		        		  object.setTlFusionId(null);
+		        	  else
+		        		  object.setTlFusionId(formatter.formatCellValue(currentCell));
+		            break;
+		            
 		          default:	
 		            break;
 		          }
