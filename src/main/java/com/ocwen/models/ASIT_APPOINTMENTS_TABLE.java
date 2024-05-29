@@ -16,8 +16,8 @@ public class ASIT_APPOINTMENTS_TABLE {
 	
 	@Id
 	  @Column(name = "id")
-	  /*@GeneratedValue(strategy=GenerationType.AUTO, generator="apptid_generator")
-	  @SequenceGenerator(name="apptid_generator", sequenceName = "ASIT_APPOINTMENTS_TABLE_seq", allocationSize=1)*/
+	  @GeneratedValue(strategy=GenerationType.AUTO, generator="apptid_generator")
+	  @SequenceGenerator(name="apptid_generator", sequenceName = "ASIT_APPOINTMENTS_TABLE_seq", allocationSize=1)
 	  private long id;
 	
 	  @Column(name = "MONTH")
