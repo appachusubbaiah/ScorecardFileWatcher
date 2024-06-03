@@ -31,8 +31,11 @@ import com.ocwen.ExcelHelperAsitQaYield;
 import com.ocwen.ExcelHelperAsitQuality;
 import com.ocwen.ExcelHelperAsitRefiSoli;
 import com.ocwen.ExcelHelperAsitResCredits;
+import com.ocwen.ExcelHelperAsitRevCmsDefect;
 import com.ocwen.ExcelHelperAsitRevCs;
 import com.ocwen.ExcelHelperAsitRevHrd;
+import com.ocwen.ExcelHelperAsitRevIcp;
+import com.ocwen.ExcelHelperAsitRevTelephony;
 import com.ocwen.ExcelHelperAsitRmic;
 import com.ocwen.ExcelHelperAsitRoster;
 import com.ocwen.ExcelHelperAsitSkillPort;
@@ -40,6 +43,7 @@ import com.ocwen.ExcelHelperAsitTLImpact;
 import com.ocwen.ExcelHelperAsitTLQC;
 import com.ocwen.ExcelHelperAsitTelephony;
 import com.ocwen.ExcelHelperAsitTlHuddle;
+import com.ocwen.ExcelHelperRevVerbalOcc;
 import com.ocwen.ExcelHelperStarRating;
 import com.ocwen.ExcelHelperTat;
 import com.ocwen.models.ASIT_AHT;
@@ -54,8 +58,12 @@ import com.ocwen.models.ASIT_QUALITY;
 import com.ocwen.models.ASIT_QUALITY_YIELD;
 import com.ocwen.models.ASIT_REFI_SOLI;
 import com.ocwen.models.ASIT_RES_CREDITS;
+import com.ocwen.models.ASIT_REV_CMS_DEFECT;
 import com.ocwen.models.ASIT_REV_CS;
 import com.ocwen.models.ASIT_REV_HRD;
+import com.ocwen.models.ASIT_REV_ICP;
+import com.ocwen.models.ASIT_REV_TELEPHONY;
+import com.ocwen.models.ASIT_REV_VERBAL_OCL;
 import com.ocwen.models.ASIT_RMIC;
 import com.ocwen.models.ASIT_ROSTER_TABLE;
 import com.ocwen.models.ASIT_SKILLPORT;
@@ -76,8 +84,12 @@ import com.ocwen.repositories.ASIT_QUALITY_REPOSITORY;
 import com.ocwen.repositories.ASIT_QUALITY_YIELD_Repository;
 import com.ocwen.repositories.ASIT_REFI_SOLI_Repository;
 import com.ocwen.repositories.ASIT_RES_CREDITS_Repository;
+import com.ocwen.repositories.ASIT_REV_CMS_DEFECT_Repository;
 import com.ocwen.repositories.ASIT_REV_CS_Repository;
 import com.ocwen.repositories.ASIT_REV_HRD_Repository;
+import com.ocwen.repositories.ASIT_REV_ICP_Repository;
+import com.ocwen.repositories.ASIT_REV_TELEPHONY_Repository;
+import com.ocwen.repositories.ASIT_REV_VERBAL_OCL_Repository;
 import com.ocwen.repositories.ASIT_RMIC_Repository;
 import com.ocwen.repositories.ASIT_ROSTER_TABLE_Repository;
 import com.ocwen.repositories.ASIT_SKILLPORT_Repository;
@@ -156,6 +168,18 @@ public class ExcelService {
 	
 	@Autowired
 	ASIT_TL_HUDDLE_Repository tlHuddleRepository;
+	
+	@Autowired
+	ASIT_REV_CMS_DEFECT_Repository revCmsdefectRepository;
+	
+	@Autowired
+	ASIT_REV_ICP_Repository revIcpRepository;
+	
+	@Autowired
+	ASIT_REV_TELEPHONY_Repository revTelephonyRepository;
+	
+	@Autowired
+	ASIT_REV_VERBAL_OCL_Repository revVerbalOccRepository;
 	
 	@Autowired
 	private Environment env;
@@ -442,6 +466,58 @@ public class ExcelService {
 		    	  System.out.println("Saving to database....");
 		    	  logger.info("Saving to database....");
 		    	  tlHuddleRepository.saveAll(starObjects);
+		    	  System.out.println("Saved to database");
+		    	  logger.info("Saving to database complete.");
+		    	  moveFile(file);
+	    	  }
+	     		
+	     	case "ASIT_REV_CMS_DEFECT.xlsx":
+	     		if(this.fileIsReady(file)){
+		    		  logger.info("About to call excelToObjects",file.getName());
+		    	  List<ASIT_REV_CMS_DEFECT> starObjects = ExcelHelperAsitRevCmsDefect.excelToObjects(new FileInputStream(file));
+		    	  System.out.println("Saving to database....");
+		    	  logger.info("Saving to database....");
+		    	  revCmsdefectRepository.saveAll(starObjects);
+		    	  System.out.println("Saved to database");
+		    	  logger.info("Saving to database complete.");
+		    	  moveFile(file);
+	    	  }
+	     		
+	     		break;
+	     		
+	     	case "ASIT_REV_ICP.xlsx":
+	     		if(this.fileIsReady(file)){
+		    		  logger.info("About to call excelToObjects",file.getName());
+		    	  List<ASIT_REV_ICP> starObjects = ExcelHelperAsitRevIcp.excelToObjects(new FileInputStream(file));
+		    	  System.out.println("Saving to database....");
+		    	  logger.info("Saving to database....");
+		    	  revIcpRepository.saveAll(starObjects);
+		    	  System.out.println("Saved to database");
+		    	  logger.info("Saving to database complete.");
+		    	  moveFile(file);
+	    	  }
+	     		
+	     		break;
+	     		
+	     	case "ASIT_REV_TELEPHONY.xlsx":
+	     		if(this.fileIsReady(file)){
+		    		  logger.info("About to call excelToObjects",file.getName());
+		    	  List<ASIT_REV_TELEPHONY> starObjects = ExcelHelperAsitRevTelephony.excelToObjects(new FileInputStream(file));
+		    	  System.out.println("Saving to database....");
+		    	  logger.info("Saving to database....");
+		    	  revTelephonyRepository.saveAll(starObjects);
+		    	  System.out.println("Saved to database");
+		    	  logger.info("Saving to database complete.");
+		    	  moveFile(file);
+	    	  }
+	     		
+	     	case "ASIT_REV_VERBAL_OCL.xlsx":
+	     		if(this.fileIsReady(file)){
+		    		  logger.info("About to call excelToObjects",file.getName());
+		    	  List<ASIT_REV_VERBAL_OCL> starObjects = ExcelHelperRevVerbalOcc.excelToObjects(new FileInputStream(file));
+		    	  System.out.println("Saving to database....");
+		    	  logger.info("Saving to database....");
+		    	  revVerbalOccRepository.saveAll(starObjects);
 		    	  System.out.println("Saved to database");
 		    	  logger.info("Saving to database complete.");
 		    	  moveFile(file);
