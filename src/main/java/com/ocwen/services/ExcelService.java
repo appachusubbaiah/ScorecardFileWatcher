@@ -43,6 +43,7 @@ import com.ocwen.ExcelHelperAsitTLImpact;
 import com.ocwen.ExcelHelperAsitTLQC;
 import com.ocwen.ExcelHelperAsitTelephony;
 import com.ocwen.ExcelHelperAsitTlHuddle;
+import com.ocwen.ExcelHelperRevAht;
 import com.ocwen.ExcelHelperRevVerbalOcc;
 import com.ocwen.ExcelHelperStarRating;
 import com.ocwen.ExcelHelperTat;
@@ -58,6 +59,7 @@ import com.ocwen.models.ASIT_QUALITY;
 import com.ocwen.models.ASIT_QUALITY_YIELD;
 import com.ocwen.models.ASIT_REFI_SOLI;
 import com.ocwen.models.ASIT_RES_CREDITS;
+import com.ocwen.models.ASIT_REV_AHT;
 import com.ocwen.models.ASIT_REV_CMS_DEFECT;
 import com.ocwen.models.ASIT_REV_CS;
 import com.ocwen.models.ASIT_REV_HRD;
@@ -84,6 +86,7 @@ import com.ocwen.repositories.ASIT_QUALITY_REPOSITORY;
 import com.ocwen.repositories.ASIT_QUALITY_YIELD_Repository;
 import com.ocwen.repositories.ASIT_REFI_SOLI_Repository;
 import com.ocwen.repositories.ASIT_RES_CREDITS_Repository;
+import com.ocwen.repositories.ASIT_REV_AHT_Repository;
 import com.ocwen.repositories.ASIT_REV_CMS_DEFECT_Repository;
 import com.ocwen.repositories.ASIT_REV_CS_Repository;
 import com.ocwen.repositories.ASIT_REV_HRD_Repository;
@@ -180,6 +183,9 @@ public class ExcelService {
 	
 	@Autowired
 	ASIT_REV_VERBAL_OCL_Repository revVerbalOccRepository;
+	
+	@Autowired
+	ASIT_REV_AHT_Repository revAhtRepository;
 	
 	@Autowired
 	private Environment env;
@@ -327,7 +333,7 @@ public class ExcelService {
 		    	  logger.info("Saving to database complete.");
 		    	  moveFile(file);
 	    	  }
-		      break;
+		      break;	
 		      
 	       case "ASIT_RMIC.xlsx":
 	    	   if(this.fileIsReady(file)){
@@ -518,6 +524,19 @@ public class ExcelService {
 		    	  System.out.println("Saving to database....");
 		    	  logger.info("Saving to database....");
 		    	  revVerbalOccRepository.saveAll(starObjects);
+		    	  System.out.println("Saved to database");
+		    	  logger.info("Saving to database complete.");
+		    	  moveFile(file);
+	    	  }
+	     		break;
+	     		
+	     	case "ASIT_REV_AHT.xlsx":
+	     		if(this.fileIsReady(file)){
+		    		  logger.info("About to call excelToObjects",file.getName());
+		    	  List<ASIT_REV_AHT> starObjects = ExcelHelperRevAht.excelToObjects(new FileInputStream(file));
+		    	  System.out.println("Saving to database....");
+		    	  logger.info("Saving to database....");
+		    	  revAhtRepository.saveAll(starObjects);
 		    	  System.out.println("Saved to database");
 		    	  logger.info("Saving to database complete.");
 		    	  moveFile(file);
